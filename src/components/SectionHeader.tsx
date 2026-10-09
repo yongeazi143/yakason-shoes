@@ -17,7 +17,7 @@ export default function SectionHeader({
 
   return (
     <div
-      className={`sticky top-[82px] sm:top-[6px] z-30 w-full py-2.5 select-none transition-all ${className}`}
+      className={`sticky top-[2px] sm:top-[6px] z-30 w-full py-2.5 select-none transition-all ${className}`}
     >
       <div className="w-full flex items-center gap-4">
         {/* Left rule */}

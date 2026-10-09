@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
+import { SITE } from '@/lib/constants';
 
 const LOG_MESSAGES = [
   { label: 'CRAFT INITIALIZATION', status: 'OK' },

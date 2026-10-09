@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Yakason Shoes | Quality Express in Footwears · Since 2005",
-  description: "Bespoke corporate shoes, handcrafted school wear, and tactical safety boots made with pride in Lagos, Nigeria. CAC (RC 9908327) & SON Registered.",
-  keywords: ["Yakason Shoes", "Nigerian handmade shoes", "Corporate Oxford", "Bespoke shoes Lagos", "School shoes bulk Nigeria", "Military Boots Lagos"],
+  title: SITE.seo.title,
+  description: SITE.seo.description,
+  keywords: [...SITE.seo.keywords],
   openGraph: {
-    title: "Yakason Shoes | Handcrafted Footwear Since 2005",
-    description: "Quality Express in Footwears. Cut, closed, lasted and finished by trained hands in Lagos.",
-    images: ["/brand/logo.png"],
+    title: SITE.seo.openGraph.title,
+    description: SITE.seo.openGraph.description,
+    images: [...SITE.seo.openGraph.images],
   },
 };
 

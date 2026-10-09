@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import SectionHeader from '@/components/SectionHeader';
 import MagneticText from '@/components/MagneticText';
+import { SITE } from '@/lib/constants';
 
 interface LetterProps {
   char: string;
@@ -113,7 +114,7 @@ export default function ManifestoSection() {
             <blockquote
               data-cursor="text"
               data-cursor-invert="true"
-              className="text-[clamp(1.15rem,3.3vw,2.35rem)] font-heading font-black leading-[1.35] sm:leading-[1.3] md:leading-[1.28] tracking-normal select-none"
+              className="text-[clamp(1.5rem,3.3vw,2.35rem)] font-heading font-black leading-[1.35] sm:leading-[1.3] md:leading-[1.28] tracking-normal select-none"
             >
               {computedSegments.map((seg, idx) => {
                 if (seg.type === 'underlined') {
@@ -153,7 +154,7 @@ export default function ManifestoSection() {
             style={{ opacity: attributionOpacity, y: attributionY }}
             className="mt-4 sm:mt-6 md:mt-8 font-body text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.22em] uppercase text-[#6A3527]"
           >
-            — YAKASON MASTER COBBLERS · 99 ABEOKUTA EXPRESSWAY
+            {SITE.address.attribution}
           </motion.div>
         </div>
 

@@ -1,22 +1,20 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { SITE } from '@/lib/constants';
+import YakasonLogo from '@/components/YakasonLogo';
 
 interface MenuDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  onOpenOrder: (product?: string) => void;
+  onOpenOrder?: (product?: string) => void;
 }
 
 export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerProps) {
-  const navItems = [
-    { label: 'THE MANIFESTO', href: '#manifesto', num: '01' },
-    { label: '3D ANATOMY OF CRAFT', href: '#anatomy', num: '02' },
-    { label: 'COLLECTIONS', href: '#collection', num: '03' },
-    { label: 'SERVICES', href: '#services', num: '04' },
-  ];
+  const navItems = SITE.navigation;
 
   return (
     <AnimatePresence>
@@ -46,14 +44,12 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
           >
             {/* Top Bar */}
             <div className="flex items-center justify-between border-b border-[#6A3527]/15 pb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full border border-[#6A3527]/40 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#B9814F]" />
-                </div>
-                <span className="font-heading font-black text-base sm:text-lg tracking-[0.25em] text-[#3B1E16]">
-                  YAKASON SHOES
-                </span>
-              </div>
+              <YakasonLogo
+                linked={false}
+                sizeClassName="w-28 sm:w-36"
+                className="opacity-90"
+                ariaLabel={SITE.name}
+              />
               <button
                 onClick={onClose}
                 className="w-10 h-10 rounded-full border border-[#6A3527]/25 hover:border-[#6A3527] text-[#6A3527] flex items-center justify-center transition cursor-pointer"
@@ -69,8 +65,26 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={onClose}
-                  className="font-heading font-black text-2xl sm:text-4xl md:text-5xl text-[#3B1E16]/80 justify-end hover:text-[#6A3527] transition tracking-tight flex items-center gap-4 group"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onClose();
+                    if (item.href.startsWith('#')) {
+                      const el = document.getElementById(item.href.slice(1));
+                      if (el) {
+                        setTimeout(() => {
+                          const lenis = (window as any).__LENIS__;
+                          if (lenis) {
+                            lenis.scrollTo(el, { offset: 0, duration: 1.3 });
+                          } else {
+                            el.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }, 120);
+                      } else {
+                        window.location.href = `/${item.href}`;
+                      }
+                    }
+                  }}
+                  className="font-heading font-black text-2xl sm:text-4xl md:text-5xl text-[#3B1E16]/80 justify-end hover:text-[#6A3527] transition tracking-tight flex items-center gap-4 group cursor-pointer"
                 >
                   {/* <span className="text-xs sm:text-sm font-num text-[#B9814F]">{item.num}</span> */}
                   <span className="group-hover:translate-x-2 transition-transform duration-200">
@@ -83,18 +97,16 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
             {/* Footer Details */}
             <div className="border-t border-[#6A3527]/15 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-body tracking-wider uppercase text-[#241B17]/75">
               <div>
-                <p className="text-[#3B1E16] font-bold">99 ABEOKUTA EXPRESSWAY, LAGOS</p>
-                <p className="text-[#6A3527]">CAC RC 9908327 · SON REGISTERED</p>
+                <p className="text-[#3B1E16] font-bold">{SITE.address.factoryShortUppercase}</p>
+                <p className="text-[#6A3527]">{SITE.registrationTextShort}</p>
               </div>
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenOrder('Corporate Oxford');
-                }}
-                className="bg-[#3B1E16] hover:bg-[#6A3527] text-[#F6EEE3] px-6 py-2.5 rounded font-heading font-bold text-xs tracking-widest uppercase transition cursor-pointer shadow-sm"
+              <Link
+                href="/bulk-order?product=Corporate%20Oxford"
+                onClick={onClose}
+                className="bg-[#3B1E16] hover:bg-[#6A3527] text-[#F6EEE3] px-6 py-2.5 rounded font-heading font-bold text-xs tracking-widest uppercase transition cursor-pointer shadow-sm inline-flex items-center justify-center"
               >
                 ORDER IN BULK
-              </button>
+              </Link>
             </div>
           </motion.div>
         </>

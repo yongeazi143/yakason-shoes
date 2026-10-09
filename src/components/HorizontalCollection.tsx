@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, PackageCheck, Eye } from 'lucide-react';
 import SectionHeader from '@/components/SectionHeader';
@@ -88,7 +89,7 @@ const PRODUCTS: ProductItem[] = [
   },
 ];
 
-export default function HorizontalCollection({ onSelectProduct }: { onSelectProduct: (productName: string) => void }) {
+export default function HorizontalCollection({ onSelectProduct }: { onSelectProduct?: (productName: string) => void }) {
   return (
     <section id="collection" className="py-16 md:py-24 overflow-hidden border-t border-b border-[#6A3527]/15">
       <div className="px-6 md:px-12 max-w-7xl mx-auto mb-8">
@@ -147,12 +148,12 @@ export default function HorizontalCollection({ onSelectProduct }: { onSelectProd
                 </span>
               </div>
 
-              <button
-                onClick={() => onSelectProduct(item.name)}
+              <Link
+                href={`/bulk-order?product=${encodeURIComponent(item.name)}&type=sample`}
                 className="w-full border border-[#6A3527] hover:bg-[#6A3527]/[0.08] text-[#6A3527] py-2.5 rounded text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2 mt-2"
               >
                 Request Sample & Quote <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              </Link>
             </div>
           </motion.div>
         ))}

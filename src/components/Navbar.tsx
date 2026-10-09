@@ -1,23 +1,30 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { SITE } from '@/lib/constants';
+import YakasonLogo from '@/components/YakasonLogo';
 
 interface NavbarProps {
   onOpenMenu: () => void;
-  heroRef: React.RefObject<HTMLElement | null>;
+  heroRef?: React.RefObject<HTMLElement | null>;
+  isSolid?: boolean;
 }
 
-export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
+export default function Navbar({ onOpenMenu, heroRef, isSolid = false }: NavbarProps) {
   const [lagosTime, setLagosTime] = useState('19:56');
-  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(isSolid || !heroRef);
 
   // Trigger navbar background ONLY after the user has completely scrolled past the hero section
   useEffect(() => {
+    if (isSolid || !heroRef) {
+      setIsScrolledPastHero(true);
+      return;
+    }
+
     const handleScroll = () => {
       const heroEl = heroRef.current;
       if (!heroEl) {
-        setIsScrolledPastHero(window.scrollY > window.innerHeight);
+        setIsScrolledPastHero(true);
         return;
       }
       const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
@@ -28,14 +35,14 @@ export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [heroRef]);
+  }, [heroRef, isSolid]);
 
   // Real-time Lagos Clock (WAT UTC+1)
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-GB', {
-        timeZone: 'Africa/Lagos',
+      const timeStr = now.toLocaleTimeString(SITE.clock.locale, {
+        timeZone: SITE.clock.timezone,
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
@@ -47,22 +54,27 @@ export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
     return () => clearInterval(interval);
   }, []);
 
+  const showSolidBackground = isSolid || isScrolledPastHero;
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-40 px-6 sm:px-12 md:px-16 transition-all duration-300 flex items-center justify-between pointer-events-none ${isScrolledPastHero
+      className={`fixed top-0 left-0 w-full z-40 px-6 sm:px-12 md:px-16 transition-all duration-300 flex items-center justify-between pointer-events-none ${showSolidBackground
         ? 'py-4 bg-[#FBF8F3]/90 backdrop-blur-md border-b border-[#6A3527]/[0.12] shadow-sm'
-        : 'py-2 bg-transparent'
+        : 'py-6 bg-transparent'
         }`}
     >
-      {/* Top Left: Outlined circular emblem + Brand Title */}
-      <div className="flex items-center gap-4 pointer-events-auto">
-        <Image src="/brand/logo.png" alt="Logo" width={854} height={352} priority className='w-[10vw] object-cover' />
-      </div>
+      {/* Top Left: Brand logo — single source of truth via YakasonLogo */}
+      <YakasonLogo
+        linked
+        className="pointer-events-auto"
+        sizeClassName="w-[10vw] min-w-[64px] max-w-[140px]"
+        ariaLabel="Yakason Shoes Home"
+      />
 
       {/* Top Right: Digital City Clock + Minimalist Hamburger Menu */}
       <div className="flex items-center gap-6 md:gap-9 pointer-events-auto">
-        <span className="font-num text-xs tracking-[0.25em] text-[#6A3527] font-semibold select-none">
-          RC NO: 9908327 • LAGOS {lagosTime}
+        <span className="hidden sm:block font-num text-xs tracking-[0.25em] text-[#6A3527] font-semibold select-none">
+          {SITE.rcDisplay} • {SITE.clock.city} {lagosTime}
         </span>
         <button
           onClick={onOpenMenu}

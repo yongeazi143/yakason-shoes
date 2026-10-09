@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 import { HERO_3D_CONFIG } from '@/components/ShoeHeroCanvas';
 import MagneticText from '@/components/MagneticText';
@@ -12,7 +13,7 @@ const ShoeHeroCanvas = dynamic(() => import('@/components/ShoeHeroCanvas'), {
 
 interface HeroSectionProps {
   heroRef: React.RefObject<HTMLElement | null>;
-  onOpenOrder: (productName?: string) => void;
+  onOpenOrder?: (productName?: string) => void;
 }
 
 export default function HeroSection({ heroRef, onOpenOrder }: HeroSectionProps) {
@@ -120,12 +121,12 @@ export default function HeroSection({ heroRef, onOpenOrder }: HeroSectionProps) 
             </a>
 
             {/* ORDER IN BULK Button */}
-            <button
-              onClick={() => onOpenOrder('Corporate Oxford')}
-              className="bg-[#FBF8F3] hover:bg-[#E8D2B8] text-[#241B17] font-heading font-black text-xs tracking-widest uppercase px-5 py-2.5 rounded transition shadow-sm cursor-pointer"
+            <Link
+              href="/bulk-order?product=Corporate%20Oxford"
+              className="bg-[#FBF8F3] hover:bg-[#E8D2B8] text-[#241B17] font-heading font-black text-xs tracking-widest uppercase px-5 py-2.5 rounded transition shadow-sm cursor-pointer inline-flex items-center justify-center"
             >
               ORDER IN BULK
-            </button>
+            </Link>
           </div>
         </div>
       </div>

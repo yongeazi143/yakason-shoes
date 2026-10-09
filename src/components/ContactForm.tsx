@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle, Send } from 'lucide-react';
-
-const PHONE = '2348033000000'; // ← change to real number
+import { SITE } from '@/lib/constants';
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -13,8 +12,8 @@ interface ContactFormProps {
 
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [name, setName] = useState('');
-  const [message, setMessage] = useState(
-    'Hello Yakason Shoes, I would like to inquire about bespoke footwear.'
+  const [message, setMessage] = useState<string>(
+    SITE.whatsapp.prefilledMessage
   );
   const [sent, setSent] = useState(false);
 
@@ -22,13 +21,13 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     e.preventDefault();
     if (!name.trim()) return;
     const text = encodeURIComponent(`Hi, my name is ${name}.\n\n${message}`);
-    window.open(`https://wa.me/${PHONE}?text=${text}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/${SITE.whatsapp.number}?text=${text}`, '_blank', 'noopener,noreferrer');
     setSent(true);
     setTimeout(() => {
       setSent(false);
       onClose();
       setName('');
-      setMessage('Hello Yakason Shoes, I would like to inquire about bespoke footwear.');
+      setMessage(SITE.whatsapp.prefilledMessage);
     }, 2000);
   };
 

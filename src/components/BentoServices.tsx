@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Building2, GraduationCap, ShieldAlert, Stamp, ArrowUpRight } from 'lucide-react';
 
@@ -8,7 +9,7 @@ import SectionHeader from '@/components/SectionHeader';
 import MagneticText from '@/components/MagneticText';
 
 interface BentoServicesProps {
-  onOpenQuote: (serviceName: string) => void;
+  onOpenQuote?: (serviceName: string) => void;
 }
 
 export default function BentoServices({ onOpenQuote }: BentoServicesProps) {
@@ -51,12 +52,12 @@ export default function BentoServices({ onOpenQuote }: BentoServicesProps) {
             <span className="text-xs font-semibold uppercase tracking-wider text-[#6A3527]">
               Samples First · Flexible Milestone Terms
             </span>
-            <button
-              onClick={() => onOpenQuote('Bulk & Corporate Orders')}
+            <Link
+              href="/bulk-order?product=Corporate%20Oxford&type=bulk"
               className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#6A3527] hover:text-[#3B1E16] group-hover:underline"
             >
               Inquire Corporate Rate <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -79,12 +80,12 @@ export default function BentoServices({ onOpenQuote }: BentoServicesProps) {
           </div>
 
           <div className="mt-6 pt-4 border-t border-[#6A3527]/15">
-            <button
-              onClick={() => onOpenQuote('School Supply')}
+            <Link
+              href="/bulk-order?product=Cortina%20School%20Shoe&type=bulk"
               className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#6A3527] hover:text-[#3B1E16] group-hover:underline"
             >
               Request School Tiers <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -107,12 +108,12 @@ export default function BentoServices({ onOpenQuote }: BentoServicesProps) {
           </div>
 
           <div className="mt-6 pt-4 border-t border-[#6A3527]/15">
-            <button
-              onClick={() => onOpenQuote('Military & Safety Boots')}
+            <Link
+              href="/bulk-order?product=Safety%20Boot%20(Steel%20Toe)&type=bulk"
               className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#6A3527] hover:text-[#3B1E16] group-hover:underline"
             >
               Order Tender Batches <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -138,12 +139,12 @@ export default function BentoServices({ onOpenQuote }: BentoServicesProps) {
             <span className="text-xs font-semibold uppercase tracking-wider text-[#6A3527]">
               Bespoke Lasting · Private Labeling
             </span>
-            <button
-              onClick={() => onOpenQuote('Made to Customer Specification')}
+            <Link
+              href="/bulk-order?type=sample"
               className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#6A3527] hover:text-[#3B1E16] group-hover:underline"
             >
               Start Custom Brief <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>

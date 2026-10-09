@@ -553,6 +553,7 @@ export default function ShoeHeroCanvas() {
         pin: true,
         anticipatePin: HERO_3D_CONFIG.scroll.anticipatePin,
         scrub: HERO_3D_CONFIG.scroll.scrub,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           progressRef.current = self.progress;
           // Store on window for cursor label synchronization
@@ -560,6 +561,8 @@ export default function ShoeHeroCanvas() {
         },
       });
     });
+
+    ScrollTrigger.refresh();
 
     return () => {
       ctx.revert();

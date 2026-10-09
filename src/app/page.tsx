@@ -16,21 +16,13 @@ import NewsletterSection from '@/components/NewsletterSection';
 import Footer from '@/components/Footer';
 import MenuDrawer from '@/components/MenuDrawer';
 import ContactForm from '@/components/ContactForm';
-import OrderModal from '@/components/OrderModal';
 import FloatingControls from '@/components/FloatingControls';
 import CookieNotice from '@/components/CookieNotice';
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('Corporate Oxford');
   const heroRef = useRef<HTMLElement>(null);
-
-  const handleOpenOrder = (prodName?: string) => {
-    if (prodName) setSelectedProduct(prodName);
-    setIsModalOpen(true);
-  };
 
   return (
     <SmoothScrollProvider>
@@ -48,7 +40,7 @@ export default function HomePage() {
         <Navbar onOpenMenu={() => setIsMenuOpen(true)} heroRef={heroRef} />
 
         {/* 1. Hero Section with Colossal Headline & Magnetic Micro Animation */}
-        <HeroSection heroRef={heroRef} onOpenOrder={handleOpenOrder} />
+        <HeroSection heroRef={heroRef} />
 
         {/* 2. Our Sole Belief: Pinned Letter-by-Letter Scroll Reveal on Cream Background */}
         <ManifestoSection />
@@ -57,7 +49,6 @@ export default function HomePage() {
         <div
           id="anatomy-and-collection-wrap"
           className="relative bg-[#FBF8F3]"
-          style={{ clipPath: 'inset(0)' }}
         >
           {/* Phase A: Fixed 3D Perspective Grid Background */}
           <PerspectiveGridBackground />
@@ -69,13 +60,13 @@ export default function HomePage() {
 
           {/* 4. Bespoke Collection Showcase */}
           <div className="relative z-10">
-            <HorizontalCollection onSelectProduct={handleOpenOrder} />
+            <HorizontalCollection />
           </div>
         </div>
 
         {/* 5. Bento Capabilities & Contract Manufacturing */}
         <div className="bg-gradient-to-b from-[#FBF8F3] via-[#F6EEE3] to-[#E8D2B8]">
-          <BentoServices onOpenQuote={handleOpenOrder} />
+          <BentoServices />
         </div>
 
         {/* 6. Newsletter Subscription */}
@@ -94,20 +85,12 @@ export default function HomePage() {
         <MenuDrawer
           isOpen={isMenuOpen}
           onClose={() => setIsMenuOpen(false)}
-          onOpenOrder={handleOpenOrder}
         />
 
         {/* Contact Form Modal */}
         <ContactForm
           isOpen={isContactOpen}
           onClose={() => setIsContactOpen(false)}
-        />
-
-        {/* Order Modal */}
-        <OrderModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          defaultProduct={selectedProduct}
         />
       </main>
     </SmoothScrollProvider>

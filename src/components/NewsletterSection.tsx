@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, FormEvent } from 'react';
+import { SITE } from '@/lib/constants';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -16,7 +17,7 @@ export default function NewsletterSection() {
     // Client-side email validation
     if (!email || !EMAIL_REGEX.test(email.trim())) {
       setStatus('error');
-      setErrorMessage('Please enter a valid email address.');
+      setErrorMessage(SITE.newsletter.errorMessage);
       return;
     }
 
@@ -40,11 +41,11 @@ export default function NewsletterSection() {
         setEmail('');
       } else {
         setStatus('error');
-        setErrorMessage(data?.error || 'Please enter a valid email address.');
+        setErrorMessage(data?.error || SITE.newsletter.errorMessage);
       }
     } catch {
       setStatus('error');
-      setErrorMessage('Please enter a valid email address.');
+      setErrorMessage(SITE.newsletter.errorMessage);
     }
   };
 
@@ -58,18 +59,18 @@ export default function NewsletterSection() {
         {/* Label Pill matching hero design token */}
         <div className="flex justify-center mb-6">
           <span className="text-[10px] md:text-xs font-heading font-bold tracking-[0.3em] uppercase whitespace-nowrap px-3.5 py-1 rounded-full border border-[#D4A24C]/35 text-[#D4A24C] bg-[#3B1E16]/80 shadow-xs">
-            NEWSLETTER
+            {SITE.newsletter.badge}
           </span>
         </div>
 
         {/* Headline */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight uppercase leading-tight mb-4">
-          Stay close to the craft.
+          {SITE.newsletter.headline}
         </h2>
 
         {/* Supporting Line */}
         <p className="font-body text-xs sm:text-sm md:text-base text-[#FBF8F3]/80 leading-relaxed mb-8 max-w-lg mx-auto">
-          New collections, bulk-order offers and updates from Yakason Global Best Venture. No spam.
+          {SITE.newsletter.description}
         </p>
 
         {/* Form without card boundary */}
@@ -100,7 +101,7 @@ export default function NewsletterSection() {
               type="email"
               required
               autoComplete="email"
-              placeholder="Your email address"
+              placeholder={SITE.newsletter.placeholder}
               value={email}
               disabled={status === 'loading'}
               onChange={(e) => {
@@ -119,14 +120,14 @@ export default function NewsletterSection() {
               disabled={status === 'loading'}
               className="min-h-[48px] px-6 py-3 bg-[#D4A24C] hover:bg-[#B9814F] text-[#241B17] font-heading font-bold text-xs tracking-widest uppercase rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[#FBF8F3] focus:ring-offset-2 focus:ring-offset-[#241B17] disabled:opacity-50 cursor-pointer shrink-0"
             >
-              {status === 'loading' ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
+              {status === 'loading' ? SITE.newsletter.subscribingText : SITE.newsletter.buttonText}
             </button>
           </div>
 
           {/* Inline Feedback States */}
           <div aria-live="polite" className="min-h-[24px] mt-3 text-xs font-semibold">
             {status === 'success' && (
-              <p className="text-[#D4A24C]">You&apos;re on the list. Thank you.</p>
+              <p className="text-[#D4A24C]">{SITE.newsletter.successMessage}</p>
             )}
             {status === 'error' && (
               <p className="text-[#E58B7B]">{errorMessage}</p>
@@ -136,7 +137,7 @@ export default function NewsletterSection() {
 
         {/* Privacy Note */}
         <p className="font-body text-[11px] sm:text-xs text-[#FBF8F3]/60 mt-1">
-          We respect your inbox. Unsubscribe anytime.
+          {SITE.newsletter.privacyNote}
         </p>
       </div>
     </section>

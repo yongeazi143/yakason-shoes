@@ -3,10 +3,19 @@
 import React from 'react';
 import { ArrowUp, Phone, MapPin, Clock, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
+import { SITE } from '@/lib/constants';
 
 export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const lenis = (window as any).__LENIS__;
+    if (lenis) {
+      lenis.scrollTo(0, {
+        duration: 1.4,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -16,14 +25,14 @@ export default function Footer() {
         {/* Brand Col */}
         <div className="md:col-span-2 space-y-4">
           <div className="flex items-center gap-4 pointer-events-auto">
-            <Image src="/brand/logo.png" alt="Logo" width={854} height={352} priority className='w-[15vw] object-cover mix-blend-difference' />
+            <Image src={SITE.logo.path} alt={SITE.logo.alt} width={SITE.logo.width} height={SITE.logo.height} priority className='w-[20vw] object-cover mix-blend-difference' />
           </div>
           <p className="text-sm text-[#F6EEE3]/80 font-body max-w-sm leading-relaxed">
-            Quality Express in Footwears. Handcrafted in Lagos, Nigeria since 2005. Supplying corporate executives, schools, and paramilitary institutions with durable Nigerian excellence.
+            {SITE.footer.brandDescription}
           </p>
           <div className="pt-2 text-xs font-semibold text-[#D4A24C] flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#D4A24C]" />
-            Yakason Global Best Venture · RC 9908327 · SON Registered
+            {SITE.certificationBadge}
           </div>
         </div>
 
@@ -34,11 +43,11 @@ export default function Footer() {
           </h4>
           <p className="text-sm text-[#F6EEE3]/80 flex items-start gap-2">
             <MapPin className="w-4 h-4 text-[#D4A24C] shrink-0 mt-0.5" />
-            <span>99 Abeokuta Expressway, Lagos State, Nigeria</span>
+            <span>{SITE.address.factoryAndShowroom}</span>
           </p>
           <p className="text-sm text-[#F6EEE3]/80 flex items-center gap-2">
             <Clock className="w-4 h-4 text-[#D4A24C] shrink-0" />
-            <span>Mon – Sat: 8:00 AM – 6:00 PM</span>
+            <span>{SITE.address.hours}</span>
           </p>
         </div>
 
@@ -49,10 +58,10 @@ export default function Footer() {
           </h4>
           <p className="text-sm text-[#F6EEE3]/80 flex items-center gap-2">
             <Phone className="w-4 h-4 text-[#D4A24C] shrink-0" />
-            <span>+234 803 000 0000 / +234 802 000 0000</span>
+            <span>{SITE.contact.phoneDisplay}</span>
           </p>
           <p className="text-xs text-[#F6EEE3]/70">
-            Wholesale Carton Dispatches · Inter-State Transit Nationwide
+            {SITE.address.dispatchNote}
           </p>
         </div>
       </div>
@@ -61,28 +70,28 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto pt-8 border-t border-[#F6EEE3]/15 flex flex-col sm:flex-row items-center justify-between gap-4 font-body text-xs text-[#F6EEE3]/70">
         <div className="space-y-1">
           <div>
-            © 2005 – 2026 Yakason Global Best Venture. All rights reserved.
+            {SITE.footer.copyright}
           </div>
           <div className="text-[11px] text-[#F6EEE3]/60 leading-normal">
             3D model:{' '}
             <a
-              href="https://sketchfab.com/3d-models/mens-black-dress-shoes-5a256faa6cf94de08482ba98565c2269"
+              href={SITE.model3d.modelUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-[#D4A24C] transition"
             >
-              Men&apos;s Black Dress Shoes
+              {SITE.model3d.title}
             </a>{' '}
-            by CherilusUploads (Sketchfab), licensed under{' '}
+            by {SITE.model3d.author}, licensed under{' '}
             <a
-              href="http://creativecommons.org/licenses/by/4.0/"
+              href={SITE.model3d.licenseUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-[#D4A24C] transition"
             >
-              CC BY 4.0
+              {SITE.model3d.licenseName}
             </a>
-            . Modified: split into two pairs and rescaled.
+            . {SITE.model3d.modificationNote}
           </div>
         </div>
 
@@ -99,7 +108,7 @@ export default function Footer() {
       {/* Massive Watermark Lettering */}
       <div className="text-center pointer-events-none select-none opacity-5">
         <span className="font-heading text-[17vw] leading-0 tracking-wide text-[#F6EEE3] whitespace-nowrap">
-          YAKASONSHOES · EST. 2005
+          {SITE.footer.watermark}
         </span>
       </div>
     </footer>
