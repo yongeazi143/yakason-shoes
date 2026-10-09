@@ -22,7 +22,7 @@ export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
       }
       const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
       // Only trigger once user actually exits the hero section
-      setIsScrolledPastHero(window.scrollY >= heroBottom * 3.5 - 40);
+      setIsScrolledPastHero(window.scrollY >= heroBottom * 4 - 40);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -56,10 +56,7 @@ export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
     >
       {/* Top Left: Outlined circular emblem + Brand Title */}
       <div className="flex items-center gap-4 pointer-events-auto">
-        <Image src="/brand/logo.png" alt="Logo" width={50} height={50} priority />
-        <span className="font-heading font-black text-sm sm:text-base md:text-lg tracking-[0.26em] text-[#3B1E16]">
-          YAKASON GLOBAL BEST VENTURE
-        </span>
+        <Image src="/brand/logo.png" alt="Logo" width={50} height={50} priority className='' />
       </div>
 
       {/* Top Right: Digital City Clock + Minimalist Hamburger Menu */}

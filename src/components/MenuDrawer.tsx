@@ -14,8 +14,8 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
   const navItems = [
     { label: 'THE MANIFESTO', href: '#manifesto', num: '01' },
     { label: '3D ANATOMY OF CRAFT', href: '#anatomy', num: '02' },
-    { label: 'BESPOKE COLLECTION', href: '#collection', num: '03' },
-    { label: 'CONTRACT MANUFACTURING', href: '#services', num: '04' },
+    { label: 'COLLECTIONS', href: '#collection', num: '03' },
+    { label: 'SERVICES', href: '#services', num: '04' },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
               transition: { duration: 0.56, ease: [0.32, 0.72, 0, 1] },
             }}
             transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-y-0 right-0 z-50 w-full sm:w-[500px] md:w-[580px] bg-[#FBF8F3] shadow-2xl flex flex-col justify-between p-8 sm:p-12 md:p-16 text-[#241B17] border-l border-[#6A3527]/20"
+            className="fixed inset-0 z-50 w-full bg-[#FBF8F3] shadow-2xl flex flex-col justify-between p-8 sm:p-12 md:p-16 text-[#241B17] border-l border-[#6A3527]/20"
           >
             {/* Top Bar */}
             <div className="flex items-center justify-between border-b border-[#6A3527]/15 pb-6">
@@ -70,9 +70,9 @@ export default function MenuDrawer({ isOpen, onClose, onOpenOrder }: MenuDrawerP
                   key={item.label}
                   href={item.href}
                   onClick={onClose}
-                  className="font-heading font-black text-2xl sm:text-4xl md:text-5xl text-[#3B1E16]/80 hover:text-[#6A3527] transition tracking-tight flex items-center gap-4 group"
+                  className="font-heading font-black text-2xl sm:text-4xl md:text-5xl text-[#3B1E16]/80 justify-end hover:text-[#6A3527] transition tracking-tight flex items-center gap-4 group"
                 >
-                  <span className="text-xs sm:text-sm font-num text-[#B9814F]">{item.num}</span>
+                  {/* <span className="text-xs sm:text-sm font-num text-[#B9814F]">{item.num}</span> */}
                   <span className="group-hover:translate-x-2 transition-transform duration-200">
                     {item.label}
                   </span>

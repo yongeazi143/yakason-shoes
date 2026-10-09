@@ -35,7 +35,7 @@ function UnderlinedChunk({ text, startIndex, totalChars, progress }: UnderlineCh
   const opacity = useTransform(progress, [phraseStart, phraseStart + 0.02], [0, 1]);
 
   return (
-    <span className="relative inline whitespace-normal">
+    <span className="relative inline-block whitespace-nowrap">
       {text.split('').map((char, i) => {
         const charStart = ((startIndex + i) / totalChars) * 0.82;
         const charEnd = Math.min(0.95, charStart + 0.03);
@@ -51,7 +51,7 @@ function UnderlinedChunk({ text, startIndex, totalChars, progress }: UnderlineCh
       {/* Animated dotted underline that draws in as phrase lights up and stays on */}
       <motion.span
         style={{ scaleX, opacity, transformOrigin: 'left center' }}
-        className="absolute left-0 right-0 -bottom-1 h-[2px] border-b-[2.5px] border-dotted border-[#6A3527] pointer-events-none"
+        className="absolute left-0 right-0 -bottom-0.5 sm:-bottom-1 h-[2px] border-b-[2px] sm:border-b-[2.5px] border-dotted border-[#6A3527] pointer-events-none"
       />
     </span>
   );
@@ -69,21 +69,21 @@ export default function ManifestoSection() {
   const attributionY = useTransform(scrollYProgress, [0.8, 0.95], [16, 0]);
 
   // Manifesto segmented by underlined and normal chunks:
+  // Underlined items: Quality footwear, fair price, expertise, experience, efficient production, and real value.
   const textSegments = [
-    { type: 'text', content: '“' },
-    { type: 'underlined', content: 'SINCE 2005' },
-    {
-      type: 'text',
-      content: ', ONE BELIEF HAS GUIDED EVERY PAIR WE MAKE: NIGERIANS DESERVE ',
-    },
-    { type: 'underlined', content: 'SHOES THAT LAST' },
-    { type: 'text', content: '. CUT, CLOSED, LASTED AND FINISHED BY ' },
-    { type: 'underlined', content: 'TRAINED HANDS' },
-    {
-      type: 'text',
-      content:
-        ' IN LAGOS, BUILT TO COMPETE WITH IMPORTS AT A PRICE THAT MAKES SENSE.”',
-    },
+    { type: 'text', content: '“Since 2005, We make ' },
+    { type: 'underlined', content: 'quality footwear' },
+    { type: 'text', content: ' that rivals foreign brands, sold at a ' },
+    { type: 'underlined', content: 'fair price' },
+    { type: 'text', content: ' to local markets. By combining ' },
+    { type: 'underlined', content: 'expertise' },
+    { type: 'text', content: ', ' },
+    { type: 'underlined', content: 'experience' },
+    { type: 'text', content: ', marketing skills and ' },
+    { type: 'underlined', content: 'efficient production' },
+    { type: 'text', content: ', so we can deliver ' },
+    { type: 'underlined', content: 'real value' },
+    { type: 'text', content: ' to every customer.”' },
   ];
 
   // Calculate total character count and start indices
@@ -98,20 +98,22 @@ export default function ManifestoSection() {
   return (
     <div
       id="manifesto"
+      data-cursor-invert="true"
       ref={containerRef}
-      className="relative min-h-[220vh] bg-[#F6EEE3] text-[#241B17]"
+      className="relative min-h-[230vh] bg-[#F6EEE3] text-[#241B17]"
     >
       {/* Sticky viewport frame that pins to the screen until the reveal finishes */}
       <div className="sticky top-0 h-screen w-full flex flex-col justify-between px-6 sm:px-12 md:px-16 pt-20 pb-10 overflow-hidden">
         {/* Sticky section header with unified HR effect */}
         <SectionHeader label="OUR SOLE BELIEF" theme="cream" />
 
-        {/* Center: Monumental Letter-by-Letter Reveal Quote */}
-        <div className="max-w-5xl mx-auto my-auto text-center px-2 sm:px-4">
-          <MagneticText strength={10}>
+        {/* Center: Monumental Letter-by-Letter Reveal Quote scaled to perfectly fit the viewport */}
+        <div className="max-w-4xl lg:max-w-5xl mx-auto my-auto text-center px-2 sm:px-4 py-2">
+          <MagneticText strength={3}>
             <blockquote
               data-cursor="text"
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-heading font-black leading-snug tracking-wide select-none"
+              data-cursor-invert="true"
+              className="text-[clamp(1.15rem,3.3vw,2.35rem)] font-heading font-black leading-[1.35] sm:leading-[1.3] md:leading-[1.28] tracking-normal select-none"
             >
               {computedSegments.map((seg, idx) => {
                 if (seg.type === 'underlined') {
@@ -149,7 +151,7 @@ export default function ManifestoSection() {
           {/* Master Cobblers Attribution */}
           <motion.div
             style={{ opacity: attributionOpacity, y: attributionY }}
-            className="mt-8 font-body text-xs md:text-sm font-bold tracking-[0.25em] uppercase text-[#6A3527]"
+            className="mt-4 sm:mt-6 md:mt-8 font-body text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.22em] uppercase text-[#6A3527]"
           >
             — YAKASON MASTER COBBLERS · 99 ABEOKUTA EXPRESSWAY
           </motion.div>
@@ -158,7 +160,7 @@ export default function ManifestoSection() {
         {/* Bottom: Smooth scroll down link */}
         <motion.div
           style={{ opacity: attributionOpacity }}
-          className="flex flex-col items-center justify-center pb-2 select-none"
+          className="flex flex-col items-center justify-center pb-1 sm:pb-2 select-none"
         >
           <a
             href="#anatomy"

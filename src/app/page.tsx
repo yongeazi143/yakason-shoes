@@ -10,7 +10,9 @@ import HeroSection from '@/components/HeroSection';
 import ManifestoSection from '@/components/ManifestoSection';
 import AnatomyOfCraft from '@/components/AnatomyOfCraft';
 import HorizontalCollection from '@/components/HorizontalCollection';
+import PerspectiveGridBackground from '@/components/PerspectiveGridBackground';
 import BentoServices from '@/components/BentoServices';
+import NewsletterSection from '@/components/NewsletterSection';
 import Footer from '@/components/Footer';
 import MenuDrawer from '@/components/MenuDrawer';
 import ContactForm from '@/components/ContactForm';
@@ -51,20 +53,33 @@ export default function HomePage() {
         {/* 2. Our Sole Belief: Pinned Letter-by-Letter Scroll Reveal on Cream Background */}
         <ManifestoSection />
 
-        {/* 3. Anatomy of Craft (3D Exploded Layers) */}
-        <div className="bg-[#FBF8F3] border-t border-[#6A3527]/10">
-          <AnatomyOfCraft />
-        </div>
+        {/* 3 & 4. Anatomy of Craft + Collection with continuous Fixed 3D Perspective Grid */}
+        <div
+          id="anatomy-and-collection-wrap"
+          className="relative bg-[#FBF8F3]"
+          style={{ clipPath: 'inset(0)' }}
+        >
+          {/* Phase A: Fixed 3D Perspective Grid Background */}
+          <PerspectiveGridBackground />
 
-        {/* 4. Bespoke Collection Showcase */}
-        <div className="bg-[#F6EEE3]">
-          <HorizontalCollection onSelectProduct={handleOpenOrder} />
+          {/* 3. Anatomy of Craft (3D Exploded Layers) */}
+          <div className="relative z-10 border-t border-[#6A3527]/10">
+            <AnatomyOfCraft />
+          </div>
+
+          {/* 4. Bespoke Collection Showcase */}
+          <div className="relative z-10">
+            <HorizontalCollection onSelectProduct={handleOpenOrder} />
+          </div>
         </div>
 
         {/* 5. Bento Capabilities & Contract Manufacturing */}
         <div className="bg-gradient-to-b from-[#FBF8F3] via-[#F6EEE3] to-[#E8D2B8]">
           <BentoServices onOpenQuote={handleOpenOrder} />
         </div>
+
+        {/* 6. Newsletter Subscription */}
+        <NewsletterSection />
 
         {/* Footer */}
         <Footer />

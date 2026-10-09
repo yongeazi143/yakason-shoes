@@ -4,7 +4,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { ArrowDown } from 'lucide-react';
 import { HERO_3D_CONFIG } from '@/components/ShoeHeroCanvas';
-import SectionHeader from '@/components/SectionHeader';
 import MagneticText from '@/components/MagneticText';
 
 const ShoeHeroCanvas = dynamic(() => import('@/components/ShoeHeroCanvas'), {
@@ -20,6 +19,7 @@ export default function HeroSection({ heroRef, onOpenOrder }: HeroSectionProps) 
   return (
     <section
       id="hero"
+      data-hero-zone="true"
       ref={heroRef as any}
       className="relative min-h-screen w-full text-[#241B17] flex flex-col justify-between px-6 sm:px-12 md:px-16 pt-24 pb-16 overflow-hidden"
       style={{
@@ -45,13 +45,13 @@ export default function HeroSection({ heroRef, onOpenOrder }: HeroSectionProps) 
         }}
       />
 
-      {/* Sticky section cross-guide header */}
-      <SectionHeader label="QUALITY EXPRESS IN FOOTWEARS" theme="cream" />
-
       {/* Split Hero Stage: Monumental Typography (Left) + Positioning Copy (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end flex-1 z-10 pt-8 sm:pt-12">
         {/* Left: Colossal Headline with magnetic micro-animation instead of color inversion */}
-        <div className="lg:col-span-8 xl:col-span-8 select-none relative -translate-y-16 sm:-translate-y-20 md:-translate-y-24">
+        <div
+          data-cursor-invert="true"
+          className="lg:col-span-8 xl:col-span-8 select-none relative -translate-y-16 sm:-translate-y-20 md:-translate-y-24"
+        >
           <MagneticText strength={16}>
             <h1 className="font-heading font-black text-[clamp(2.85rem,7.8vw,9.5vw)] tracking-tight leading-[0.9] uppercase flex flex-col relative z-10 text-shadow-md">
               <span className="text-[#FBF8F3]">WE MAKE</span>
@@ -71,7 +71,10 @@ export default function HeroSection({ heroRef, onOpenOrder }: HeroSectionProps) 
         </div>
 
         {/* Right: Studio Positioning Copy & Actions */}
-        <div className="lg:col-span-4 xl:col-span-4 space-y-6 pb-4 relative z-10 -translate-y-10 sm:-translate-y-14 md:-translate-y-18">
+        <div
+          data-cursor-invert="true"
+          className="lg:col-span-4 xl:col-span-4 space-y-6 pb-4 relative z-10 -translate-y-10 sm:-translate-y-14 md:-translate-y-18"
+        >
           <p className="font-body text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-[#FBF8F3]/90 leading-relaxed max-w-md">
             We prioritize{' '}
             <span className="dotted-underline">durability</span> and{' '}
