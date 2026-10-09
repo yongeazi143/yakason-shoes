@@ -51,12 +51,12 @@ export default function Navbar({ onOpenMenu, heroRef }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 w-full z-40 px-6 sm:px-12 md:px-16 transition-all duration-300 flex items-center justify-between pointer-events-none ${isScrolledPastHero
         ? 'py-4 bg-[#FBF8F3]/90 backdrop-blur-md border-b border-[#6A3527]/[0.12] shadow-sm'
-        : 'py-6 md:py-8 bg-transparent'
+        : 'py-2 bg-transparent'
         }`}
     >
       {/* Top Left: Outlined circular emblem + Brand Title */}
       <div className="flex items-center gap-4 pointer-events-auto">
-        <Image src="/brand/logo.png" alt="Logo" width={50} height={50} priority className='' />
+        <Image src="/brand/logo.png" alt="Logo" width={854} height={352} priority className='w-[10vw] object-cover' />
       </div>
 
       {/* Top Right: Digital City Clock + Minimalist Hamburger Menu */}

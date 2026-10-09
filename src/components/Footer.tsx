@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ArrowUp, Phone, MapPin, Clock, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -10,21 +11,12 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-b from-[#6A3527] to-[#3B1E16] text-[#F6EEE3] border-t border-[#6A3527]/30 pt-20 pb-12 px-6 md:px-12 overflow-hidden">
-      {/* Massive Watermark Lettering */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none opacity-5">
-        <span className="font-heading text-[12vw] tracking-wider text-[#F6EEE3] whitespace-nowrap">
-          YAKASONSHOES · EST. 2005
-        </span>
-      </div>
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         {/* Brand Col */}
         <div className="md:col-span-2 space-y-4">
-          <div className="flex items-center gap-3">
-            <img src="/brand/logo.png" alt="Yakason Shoes Logo" className="h-10 w-auto object-contain" />
-            <span className="font-heading text-2xl text-[#F6EEE3] tracking-wider">
-              YAKASON SHOES
-            </span>
+          <div className="flex items-center gap-4 pointer-events-auto">
+            <Image src="/brand/logo.png" alt="Logo" width={854} height={352} priority className='w-[15vw] object-cover mix-blend-difference' />
           </div>
           <p className="text-sm text-[#F6EEE3]/80 font-body max-w-sm leading-relaxed">
             Quality Express in Footwears. Handcrafted in Lagos, Nigeria since 2005. Supplying corporate executives, schools, and paramilitary institutions with durable Nigerian excellence.
@@ -103,6 +95,12 @@ export default function Footer() {
             <ArrowUp className="w-4 h-4" />
           </div>
         </button>
+      </div>
+      {/* Massive Watermark Lettering */}
+      <div className="text-center pointer-events-none select-none opacity-5">
+        <span className="font-heading text-[17vw] leading-0 tracking-wide text-[#F6EEE3] whitespace-nowrap">
+          YAKASONSHOES · EST. 2005
+        </span>
       </div>
     </footer>
   );
