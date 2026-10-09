@@ -1,69 +1,100 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState, useRef } from 'react';
+import SmoothScrollProvider from '@/components/SmoothScrollProvider';
+import YakasonPreloader from '@/components/YakasonPreloader';
+import CustomCursor from '@/components/CustomCursor';
+import TimelineNav from '@/components/TimelineNav';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import ManifestoSection from '@/components/ManifestoSection';
+import AnatomyOfCraft from '@/components/AnatomyOfCraft';
+import HorizontalCollection from '@/components/HorizontalCollection';
+import BentoServices from '@/components/BentoServices';
+import Footer from '@/components/Footer';
+import MenuDrawer from '@/components/MenuDrawer';
+import ContactForm from '@/components/ContactForm';
+import OrderModal from '@/components/OrderModal';
+import FloatingControls from '@/components/FloatingControls';
+import CookieNotice from '@/components/CookieNotice';
+
+export default function HomePage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('Corporate Oxford');
+  const heroRef = useRef<HTMLElement>(null);
+
+  const handleOpenOrder = (prodName?: string) => {
+    if (prodName) setSelectedProduct(prodName);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <SmoothScrollProvider>
+      {/* Bootloader */}
+      <YakasonPreloader />
+
+      {/* Custom Cursor with thin espresso border, difference blending & magnetic responsiveness */}
+      <CustomCursor />
+
+      {/* Vertical Timeline Navbar from user screenshot */}
+      <TimelineNav />
+
+      <main className="relative min-h-screen bg-[#F6EEE3] text-[#241B17]">
+        {/* Navigation Bar: triggers background only once scrolled past hero */}
+        <Navbar onOpenMenu={() => setIsMenuOpen(true)} heroRef={heroRef} />
+
+        {/* 1. Hero Section with Colossal Headline & Magnetic Micro Animation */}
+        <HeroSection heroRef={heroRef} onOpenOrder={handleOpenOrder} />
+
+        {/* 2. Our Sole Belief: Pinned Letter-by-Letter Scroll Reveal on Cream Background */}
+        <ManifestoSection />
+
+        {/* 3. Anatomy of Craft (3D Exploded Layers) */}
+        <div className="bg-[#FBF8F3] border-t border-[#6A3527]/10">
+          <AnatomyOfCraft />
+        </div>
+
+        {/* 4. Bespoke Collection Showcase */}
+        <div className="bg-[#F6EEE3]">
+          <HorizontalCollection onSelectProduct={handleOpenOrder} />
+        </div>
+
+        {/* 5. Bento Capabilities & Contract Manufacturing */}
+        <div className="bg-gradient-to-b from-[#FBF8F3] via-[#F6EEE3] to-[#E8D2B8]">
+          <BentoServices onOpenQuote={handleOpenOrder} />
+        </div>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* Floating Controls: WhatsApp + SFX Audio */}
+        <FloatingControls onOpenContact={() => setIsContactOpen(true)} />
+
+        {/* Cookie Notice Banner */}
+        <CookieNotice />
+
+        {/* Menu Drawer with 40% increased duration & fully visible outro slide-out */}
+        <MenuDrawer
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
+          onOpenOrder={handleOpenOrder}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* Contact Form Modal */}
+        <ContactForm
+          isOpen={isContactOpen}
+          onClose={() => setIsContactOpen(false)}
+        />
+
+        {/* Order Modal */}
+        <OrderModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          defaultProduct={selectedProduct}
+        />
       </main>
-    </div>
+    </SmoothScrollProvider>
   );
 }

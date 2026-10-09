@@ -1,0 +1,50 @@
+=== GLTF SCENE GRAPH REPORT ===
+
+Source Model: public/models/mens_black_dress_shoes.glb
+Hierarchy:
+Node 0: "Sketchfab_Scene" (Group) 
+Node 1: "Sketchfab_model" (Object3D) 
+Node 2: "1305f7c508a045eb978cedcbd22b434bfbx" (Object3D) 
+Node 3: "RootNode" (Object3D) 
+Node 4: "Plano002" (Object3D) 
+Node 5: "Plano002_Material_0" (Mesh) [Mesh: 69 verts, 116 tris]
+Node 6: "Plano003" (Object3D) 
+Node 7: "Plano003_Material_0" (Mesh) [Mesh: 1011 verts, 1856 tris]
+Node 8: "Plano004" (Object3D) 
+Node 9: "Plano004_Material_0" (Mesh) [Mesh: 4578 verts, 8256 tris]
+Node 10: "Plano005" (Object3D) 
+Node 11: "Plano005_Material_0" (Mesh) [Mesh: 170 verts, 316 tris]
+Node 12: "Plano006" (Object3D) 
+Node 13: "Plano006_Material_0" (Mesh) [Mesh: 83 verts, 132 tris]
+Node 14: "Plano007" (Object3D) 
+Node 15: "Plano007_Material_0" (Mesh) [Mesh: 40 verts, 68 tris]
+Node 16: "ShoeTumbnail" (Object3D) 
+Node 17: "ShoeTumbnail_Material_0" (Mesh) [Mesh: 60270 verts, 33040 tris]
+Node 18: "Torus001" (Object3D) 
+Node 19: "Torus001_Material_0" (Mesh) [Mesh: 1210 verts, 2160 tris]
+Node 20: "Torus002" (Object3D) 
+Node 21: "Torus002_Material_0" (Mesh) [Mesh: 1210 verts, 2160 tris]
+Node 22: "Torus003" (Object3D) 
+Node 23: "Torus003_Material_0" (Mesh) [Mesh: 805 verts, 1320 tris]
+Node 24: "Torus004" (Object3D) 
+Node 25: "Torus004_Material_0" (Mesh) [Mesh: 805 verts, 1320 tris]
+
+=== CONNECTED COMPONENTS SPLIT ===
+
+Original ShoeTumbnail Triangles: 33040
+Original Vertex Count: 60270
+
+Detected Connected Components: 38
+SHOE_A (Upright Shoe) Triangles: 16520
+SHOE_B (Shoe on side) Triangles: 16520
+Verified Total: 33040 / 33040
+Difference: 0 (0 dropped, 0 cut)
+
+SHOE_A Center Offset: [0.027, 0.063, -0.027]
+SHOE_A Bounding Box Size: [0.295, 0.126, 0.189]
+
+SHOE_B Center Offset: [-0.050, 0.088, -0.100]
+SHOE_B Bounding Box Size: [0.312, 0.175, 0.127]
+
+Output File: public/models/shoes-split.glb (2.22 MB)
+Status: Successfully exported SHOE_A (16,520 tris) and SHOE_B (16,520 tris) into clean independent nodes with centered pivots.
