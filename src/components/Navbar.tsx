@@ -65,6 +65,7 @@ export default function Navbar({ onOpenMenu, heroRef, isSolid = false }: NavbarP
     >
       {/* Top Left: Brand logo — single source of truth via YakasonLogo */}
       <YakasonLogo
+        id="header-brand-logo"
         linked
         className="pointer-events-auto"
         sizeClassName="w-[10vw] min-w-[64px] max-w-[140px]"

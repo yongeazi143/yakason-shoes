@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { SITE } from '@/lib/constants';
 
 interface YakasonLogoProps {
+  /** Optional ID for DOM targeting */
+  id?: string;
   /** Wrap the logo in a Next.js Link to "/" */
   linked?: boolean;
   /** Extra className on the root element */
@@ -24,6 +26,7 @@ interface YakasonLogoProps {
  * are always in sync with the constants file.
  */
 export default function YakasonLogo({
+  id,
   linked = true,
   className = '',
   sizeClassName = 'w-[10vw] min-w-[72px] max-w-[160px]',
@@ -42,7 +45,7 @@ export default function YakasonLogo({
 
   if (!linked) {
     return (
-      <div className={`flex items-center ${className}`} aria-label={ariaLabel}>
+      <div id={id} className={`flex items-center ${className}`} aria-label={ariaLabel}>
         {img}
       </div>
     );
@@ -50,6 +53,7 @@ export default function YakasonLogo({
 
   return (
     <Link
+      id={id}
       href="/"
       className={`flex items-center ${className}`}
       aria-label={ariaLabel ?? `${SITE.name} — Home`}
