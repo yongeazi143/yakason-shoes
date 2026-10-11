@@ -19,7 +19,7 @@ export default function PerspectiveGridBackground({
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none"
+      className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none"
     >
       {/* 
         Perspective container with perspective-origin anchored at TOP CENTER (50% 0%).
